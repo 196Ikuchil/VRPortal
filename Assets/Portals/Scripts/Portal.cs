@@ -14,4 +14,12 @@ public class Portal : MonoBehaviour {
     {
         portalCamera.RenderIntoMaterial(_portalMaterial);
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if(col.tag == "MainCamera")
+        {
+            Debug.Log("call");
+        }
+    }
 }
