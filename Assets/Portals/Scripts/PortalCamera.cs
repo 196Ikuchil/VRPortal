@@ -8,12 +8,13 @@ public class PortalCamera : MonoBehaviour {
 
     RenderTexture _leftEyeRenderTexture;
     RenderTexture _rightEyeRenderTexture;
+    [SerializeField]
     Camera _cameraForPortal;
     Vector3 _eyeOffset;
 
     protected void Awake()
     {
-        _cameraForPortal = GetComponent<Camera>();
+        //_cameraForPortal = GetComponent<Camera>();
         _cameraForPortal.enabled = false;
 
         _leftEyeRenderTexture = new RenderTexture((int)VRSettings.eyeTextureWidth, (int)VRSettings.eyeTextureHeight, 24);

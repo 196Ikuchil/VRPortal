@@ -17,9 +17,10 @@ public class Portal : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
+        Debug.Log(col.name);
         if(col.tag == "MainCamera")
         {
-            Debug.Log("call");
+            GameMaster.Instance.ChangeWorld();
         }
     }
 }
