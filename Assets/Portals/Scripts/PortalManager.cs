@@ -5,9 +5,13 @@ public class PortalManager : MonoBehaviour {
 
     public GameObject[] RenderTextureCameras;
     public GameObject[] Portals;
-
+    Vector3 init;
     int _portalIndex;
 
+    void Start()
+    {
+
+    }
     // Update is called once per frame
     void Update () {
         _portalIndex = 0;

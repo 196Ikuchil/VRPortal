@@ -9,27 +9,53 @@ public class Mover : MonoBehaviour {
 
 	void Update () {
         if (Input.GetKey(KeyCode.W)) {
-            var pos = transform.position;
-            pos += CameraRig.forward * _speed;
-            transform.position = pos;
+            MoveForward();
         }
 
         if (Input.GetKey(KeyCode.S)) {
-            var pos = transform.position;
-            pos -= CameraRig.forward * _speed;
-            transform.position = pos;
+            MoveBack();
         }
 
         if (Input.GetKey(KeyCode.D)) {
-            var pos = transform.position;
-            pos += CameraRig.right * _speed;
-            transform.position = pos;
+            MoveRight();
         }
 
         if (Input.GetKey(KeyCode.A)) {
-            var pos = transform.position;
-            pos -= CameraRig.right * _speed;
-            transform.position = pos;
+            MoveLeft();
         }
 	}
+
+    #region KeyBoardMove
+    Vector3 vectVer;
+    Vector3 vectHori;
+    [SerializeField]
+    float moveSpeed = 10;
+    public void MoveForward()
+    {
+        vectVer = transform.forward.normalized * Time.deltaTime * moveSpeed;
+        vectVer.y = 0;
+        this.transform.position += vectVer;
+    }
+
+    public void MoveRight()
+    {
+        vectHori = transform.right.normalized * Time.deltaTime * moveSpeed / 2;
+        vectHori.y = 0;
+        this.transform.position += vectHori;
+    }
+
+    public void MoveLeft()
+    {
+        vectHori = transform.right.normalized * Time.deltaTime * moveSpeed / 2;
+        vectHori.y = 0;
+        this.transform.position -= vectHori;
+    }
+
+    public void MoveBack()
+    {
+        vectVer = transform.forward.normalized * Time.deltaTime * moveSpeed / 2.5f;
+        vectVer.y = 0;
+        this.transform.position -= vectVer;
+    }
+    #endregion
 }
