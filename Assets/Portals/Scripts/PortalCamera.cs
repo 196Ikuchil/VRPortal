@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.VR;
 
 public class PortalCamera : MonoBehaviour {
 
@@ -16,8 +15,8 @@ public class PortalCamera : MonoBehaviour {
         _cameraForPortal = GetComponent<Camera>();
         _cameraForPortal.enabled = false;
 
-        _leftEyeRenderTexture = new RenderTexture((int)VRSettings.eyeTextureWidth, (int)VRSettings.eyeTextureHeight, 24);
-        _rightEyeRenderTexture = new RenderTexture((int)VRSettings.eyeTextureWidth, (int)VRSettings.eyeTextureHeight, 24);
+        _leftEyeRenderTexture = new RenderTexture((int)SteamVR.instance.sceneWidth, (int)SteamVR.instance.sceneHeight, 24);
+        _rightEyeRenderTexture = new RenderTexture((int)SteamVR.instance.sceneWidth, (int)SteamVR.instance.sceneHeight, 24);
 
         int aa = QualitySettings.antiAliasing == 0 ? 1 : QualitySettings.antiAliasing;
         _leftEyeRenderTexture.antiAliasing = aa;
@@ -54,30 +53,23 @@ public class PortalCamera : MonoBehaviour {
     public void RenderIntoMaterial(Material material)
     {
         // Left eye.
-        /*_eyeOffset = SteamVR.instance.eyes[0].pos;
+        _eyeOffset = SteamVR.instance.eyes[0].pos;
         _eyeOffset.z = 0f;
         transform.localPosition = _eyeOffset;
-        */
-        var v = _cameraForPortal.transform.localPosition;
-        _cameraForPortal.transform.localPosition = v + new Vector3(-VrEye.stereoSeparation / 2f, 0f, 0f);
 
-        //Valve.VR.HmdMatrix44_t leftMatrix = SteamVR.instance.hmd.GetProjectionMatrix(Valve.VR.EVREye.Eye_Left, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX);
-        //_cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4(leftMatrix);
-        _cameraForPortal.projectionMatrix = VrEye.GetStereoProjectionMatrix(Camera.StereoscopicEye.Left);
+        Valve.VR.HmdMatrix44_t leftMatrix = SteamVR.instance.hmd.GetProjectionMatrix(Valve.VR.EVREye.Eye_Left, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX);
+        _cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4(leftMatrix);
         _cameraForPortal.targetTexture = _leftEyeRenderTexture;
         _cameraForPortal.Render();
         material.SetTexture("_LeftEyeTexture", _leftEyeRenderTexture);
 
         // Right eye.
-        /*_eyeOffset = SteamVR.instance.eyes[0].pos;
+        _eyeOffset = SteamVR.instance.eyes[0].pos;
         _eyeOffset.z = 0f;
         transform.localPosition = _eyeOffset;
-        */
-        _cameraForPortal.transform.localPosition = v - new Vector3(-VrEye.stereoSeparation / 2f, 0f, 0f);
 
-        //Valve.VR.HmdMatrix44_t rightMatrix = SteamVR.instance.hmd.GetProjectionMatrix(Valve.VR.EVREye.Eye_Right, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX);
-        //_cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4(rightMatrix);
-        _cameraForPortal.projectionMatrix = VrEye.GetStereoProjectionMatrix(Camera.StereoscopicEye.Right);
+        Valve.VR.HmdMatrix44_t rightMatrix = SteamVR.instance.hmd.GetProjectionMatrix(Valve.VR.EVREye.Eye_Right, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX);
+        _cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4(rightMatrix);
         _cameraForPortal.targetTexture = _rightEyeRenderTexture;
         _cameraForPortal.Render();
         material.SetTexture("_RightEyeTexture", _rightEyeRenderTexture);

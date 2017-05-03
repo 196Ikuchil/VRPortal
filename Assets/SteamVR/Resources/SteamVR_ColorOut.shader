@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Custom/SteamVR_ColorOut" {
+﻿Shader "Custom/SteamVR_ColorOut" {
 	Properties { _MainTex ("Base (RGB)", 2D) = "white" {} }
 
 	CGINCLUDE
@@ -16,7 +14,7 @@ Shader "Custom/SteamVR_ColorOut" {
 
 	v2f vert(appdata_base v) {
 		v2f o;
-		o.pos = UnityObjectToClipPos(v.vertex);
+		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 		o.tex = v.texcoord;
 		return o;
 	}

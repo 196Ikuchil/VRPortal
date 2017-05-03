@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "PortalShader" {
+﻿Shader "PortalShader" {
 	Properties{
 		_LeftEyeTexture("Left Eye Texture", 2D) = "white" {}
 		_RightEyeTexture("Left Eye Texture", 2D) = "white" {}
@@ -38,7 +36,7 @@ Shader "PortalShader" {
 			v2f vert(appdata v, out float4 outpos : SV_POSITION)
 			{
 				v2f o;
-				outpos = UnityObjectToClipPos(v.vertex);
+				outpos = mul(UNITY_MATRIX_MVP, v.vertex);
 
 				o.uv = v.uv;
 				return o;
@@ -49,7 +47,7 @@ Shader "PortalShader" {
 				float2 sUV = screenPos.xy / _ScreenParams.xy;
 
 				fixed4 col = fixed4(0.0, 0.0, 0.0, 0.0);
-				if (unity_StereoEyeIndex == 0)
+				if (unity_CameraProjection[0][2] < 0)
 				{
 					col = tex2D(_LeftEyeTexture, sUV);
 				}
