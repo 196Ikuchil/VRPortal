@@ -21,8 +21,8 @@ public class PortalManager : MonoBehaviour {
         foreach(var camera in RenderTextureCameras) {
             //camera.transform.localPosition = transform.position - Portals[_portalIndex].transform.position;
             //camera.transform.localPosition = - Portals[_portalIndex].transform.position;
-            camera.transform.localPosition = (transform.position - Portals[_portalIndex].transform.position) * 0.2F;
-            camera.transform.localRotation = Quaternion.Euler((Portals[_portalIndex].transform.position - transform.position).x, 0, 0);// * transform.localRotation;
+            camera.transform.localPosition = (transform.position - Portals[_portalIndex].transform.position);// * 0.2F;
+            camera.transform.localRotation = transform.localRotation;//Quaternion.Euler((Portals[_portalIndex].transform.position - transform.position).z, 0, 0) * transform.localRotation;
             _portalIndex++;
         }
 	}
