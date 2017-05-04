@@ -7,7 +7,7 @@ public class Portal : MonoBehaviour {
     private Material _portalMaterial;
     //微妙なブレによるcolliderの連続接触を禁止
     private bool cantChange=false;
-    private float cantChangeTime = 0.5f;
+    private float cantChangeTime = 0.7f;
     private float cantChangeTimer = 0;
     bool isSub;
 
@@ -23,7 +23,7 @@ public class Portal : MonoBehaviour {
 	}
     void Update()
     {
-        if (cantChangeTimer>cantChangeTime)
+        if (cantChange && cantChangeTimer>cantChangeTime)
         {
             cantChange = false;
         }

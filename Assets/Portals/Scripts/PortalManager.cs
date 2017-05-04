@@ -21,8 +21,6 @@ public class PortalManager : MonoBehaviour {
     GameObject mainCamera;
 
 
-
-
     [SerializeField]
     GameObject portalPref;
    
@@ -81,7 +79,7 @@ public class PortalManager : MonoBehaviour {
         var parent = port.GetComponent<PortaParent>();
         mainWorldPortals.Add(parent.GetMainPortal());
         anotherWorldportals.Add(parent.GetSubPortal());
-        parent.SetMainPortalCamera(subPortalCamera); //ここ逆に入れる(名前の設定ミス)
+        parent.SetMainPortalCamera(subPortalCamera); //ここ逆に入れること(名前の設定ミス)
         parent.SetSubPortalCamera(mainPortalCamera);
     }
 }

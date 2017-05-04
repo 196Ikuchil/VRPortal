@@ -58,7 +58,7 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
 
     public void CallCreatePortal()
     {
-        portalManager.CreatePortal(mainCamera.transform.position +=mainCamera.transform.forward*10f,mainCamera.transform.forward);
+        portalManager.CreatePortal(mainCamera.transform.position+=mainCamera.transform.forward*5f,mainCamera.transform.forward);
     }
 
 
