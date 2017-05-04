@@ -5,11 +5,12 @@ using UnityEngine;
 public class MoveManager : MonoBehaviour {
 
     [SerializeField]
-    Transform mainCamera;
+    HeadCameraScript mainCamera;
     [SerializeField]
-    Transform subCamera;
+    HeadCameraScript subCamera;
 
     float _speed = 0.05f;
+
 
     void Update()
     {
@@ -43,32 +44,32 @@ public class MoveManager : MonoBehaviour {
     Vector3 vectHori;
     [SerializeField]
     float moveSpeed = 10;
-    public void MoveForward(Transform trans)
+    public void MoveForward(HeadCameraScript camera)
     {
-        vectVer = trans.forward.normalized * Time.deltaTime * moveSpeed;
+        vectVer =  camera.GetCameraForward().normalized * Time.deltaTime * moveSpeed;
         vectVer.y = 0;
-        trans.position += vectVer;
+        camera.movePosition(vectVer);
     }
 
-    public void MoveRight(Transform trans)
+    public void MoveRight(HeadCameraScript camera)
     {
-        vectHori = trans.right.normalized * Time.deltaTime * moveSpeed / 2;
+        vectHori = camera.GetCameraRight().normalized * Time.deltaTime * moveSpeed / 2;
         vectHori.y = 0;
-        trans.position += vectHori;
+        camera.movePosition(vectHori);
     }
 
-    public void MoveLeft(Transform trans)
+    public void MoveLeft(HeadCameraScript camera)
     {
-        vectHori = trans.right.normalized * Time.deltaTime * moveSpeed / 2;
+        vectHori = camera.GetCameraRight().normalized * Time.deltaTime * moveSpeed / 2;
         vectHori.y = 0;
-        trans.position -= vectHori;
+        camera.movePosition(-vectHori);
     }
 
-    public void MoveBack(Transform trans) 
+    public void MoveBack(HeadCameraScript camera) 
     {
-        vectVer = trans.forward.normalized * Time.deltaTime * moveSpeed / 2.5f;
+        vectVer = camera.GetCameraForward().normalized * Time.deltaTime * moveSpeed/2.5f;
         vectVer.y = 0;
-        trans.position -= vectVer;
+        camera.movePosition(-vectVer);
     }
     #endregion
 }
