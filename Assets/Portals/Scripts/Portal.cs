@@ -9,8 +9,17 @@ public class Portal : MonoBehaviour {
     private bool cantChange=false;
     private float cantChangeTime = 0.5f;
     private float cantChangeTimer = 0;
+    bool isSub;
+
 	void Awake () {
         _portalMaterial = GetComponent<MeshRenderer>().sharedMaterial;
+        if(this.gameObject.layer == 8)
+        {
+            isSub = true;
+        }else
+        {
+            isSub = false;
+        }
 	}
     void Update()
     {
@@ -26,12 +35,12 @@ public class Portal : MonoBehaviour {
 	
     private void OnWillRenderObject()
     {
-        portalCamera.RenderIntoMaterial(_portalMaterial);
+        if (GameMaster.Instance.IsAnotherWorld() == isSub)
+            portalCamera.RenderIntoMaterial(_portalMaterial);
     }
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log(col.name);
         if (cantChange) return;
         if(col.tag == "MainCamera" )
         {

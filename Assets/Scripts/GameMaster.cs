@@ -10,6 +10,8 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
     [SerializeField]
     Camera subCamera;
 
+    PortalManager portalManager;
+
     bool anotherWorld = false;
     public bool IsAnotherWorld()
     {
@@ -18,7 +20,7 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
 
 	// Use this for initialization
 	void Start () {
-		
+        portalManager = this.GetComponent<PortalManager>();
 	}
 	
 	// Update is called once per frame
@@ -31,8 +33,25 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
     /// </summary>
     public void ChangeWorld()
     {
-        subCamera.depth *= -1;
         anotherWorld = !anotherWorld;
+        if (anotherWorld)//subに移動するとき
+        {
+            Debug.Log("change");
+            StartCoroutine(portalManager.MainPortalManage(!anotherWorld,0));
+            StartCoroutine(portalManager.SubPortalManage(anotherWorld,0));
+
+        }
+        else
+        {
+
+            StartCoroutine(portalManager.SubPortalManage(anotherWorld,0));
+            StartCoroutine(portalManager.MainPortalManage(!anotherWorld,0f));
+        }
+        //ChangeCamera(0.08f);
+        subCamera.depth *= -1;
     }
+
+
+
 
 }
