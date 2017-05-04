@@ -25,6 +25,11 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyUp(KeyCode.G))
+        {
+            CallCreatePortal();
+        }
 		
 	}
 
@@ -49,6 +54,11 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
         }
         //ChangeCamera(0.08f);
         subCamera.depth *= -1;
+    }
+
+    public void CallCreatePortal()
+    {
+        portalManager.CreatePortal(mainCamera.transform.position +=mainCamera.transform.forward*10f,mainCamera.transform.forward);
     }
 
 

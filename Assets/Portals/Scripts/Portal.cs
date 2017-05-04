@@ -49,4 +49,9 @@ public class Portal : MonoBehaviour {
             cantChangeTimer = 0;
         }
     }
+
+    public void SetPortalCamera(PortalCamera camera)
+    {
+        portalCamera = camera;
+    }
 }
