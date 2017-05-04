@@ -40,23 +40,13 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
     {
         anotherWorld = !anotherWorld;
         StartCoroutine(portalManager.PortalVisibleManage(anotherWorld,0f));
-        /*if (anotherWorld)//subに移動するとき
-        {
-            Debug.Log("change");
-            StartCoroutine(portalManager.MainPortalManage(!anotherWorld,0));
-            StartCoroutine(portalManager.SubPortalManage(anotherWorld,0));
-
-        }
-        else
-        {
-
-            StartCoroutine(portalManager.SubPortalManage(anotherWorld,0));
-            StartCoroutine(portalManager.MainPortalManage(!anotherWorld,0f));
-        }*/
-        //ChangeCamera(0.08f);
         subCamera.depth *= -1;
     }
 
+    /// <summary>
+    /// TODO:仮実装
+    /// 目線先の地面に作りたい
+    /// </summary>
     public void CallCreatePortal()
     {
         portalManager.CreatePortal(mainCamera.transform.position+=mainCamera.transform.forward*5f,mainCamera.transform.forward);

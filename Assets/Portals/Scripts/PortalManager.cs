@@ -46,19 +46,23 @@ public class PortalManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// TODO:
-    /// とりあえずMainからよばれる体でつくる
     /// 指定したポジションにポータルを作成する
     /// </summary>
     public void CreatePortal(Vector3 position,Vector3 forward)
     {
         forward.y = 0;
         position.y = 0;
-        var port =Instantiate(portalPref, position, Quaternion.identity);
-        port.transform.eulerAngles = -forward;
 
-        var parent = port.GetComponent<PortaParent>();
+        var parent =Instantiate(portalPref, position, Quaternion.identity).GetComponent<PortaParent>();
+        parent.transform.forward = forward;
+
         portalParents.Add(parent);
         parent.SetPortalCamera(mainPortalCamera,subPortalCamera);
+
+        if (GameMaster.Instance.IsAnotherWorld())//subなら
+        {
+            parent.transform.forward = -forward;
+            parent.SetPortalvisible(true);
+        }
     }
 }
