@@ -83,4 +83,9 @@ public class PortalCamera : MonoBehaviour {
         _cameraForPortal.Render();
         material.SetTexture("_RightEyeTexture", _rightEyeRenderTexture);
     }
+
+    public Camera GetMyPortalCamera()
+    {
+        return _cameraForPortal;
+    }
 }

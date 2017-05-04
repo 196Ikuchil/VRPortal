@@ -26,13 +26,43 @@ public class PortaParent : MonoBehaviour {
         return subPortal;
     }
 
-    public void SetMainPortalCamera(PortalCamera camera)
+    void SetMainPortalCamera(PortalCamera camera)
     {
         GetMainPortal().SetPortalCamera(camera);
     }
 
-    public void SetSubPortalCamera(PortalCamera camera)
+    void SetSubPortalCamera(PortalCamera camera)
     {
         GetSubPortal().SetPortalCamera(camera);
+    }
+
+    /// <summary>
+    /// 個々の持つポータルの可視を設定する
+    /// trueならsubの世界にいるということ
+    /// </summary>
+    /// <param name="anotherWorld"></param>
+    public void SetPortalvisible(bool anotherWorld)
+    {
+        if(anotherWorld) //subにいる
+        {
+            mainPortal.gameObject.SetActive(false);
+            mainPortal.transform.parent.gameObject.SetActive(false);
+            subPortal.gameObject.SetActive(true);
+            subPortal.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            mainPortal.gameObject.SetActive(true);
+            mainPortal.transform.parent.gameObject.SetActive(true);
+            subPortal.gameObject.SetActive(false);
+            subPortal.transform.parent.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void SetPortalCamera(PortalCamera main,PortalCamera sub)
+    {
+        SetMainPortalCamera(sub); //名前のつけ方
+        SetSubPortalCamera(main);
     }
 }

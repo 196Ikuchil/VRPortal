@@ -39,7 +39,8 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
     public void ChangeWorld()
     {
         anotherWorld = !anotherWorld;
-        if (anotherWorld)//subに移動するとき
+        StartCoroutine(portalManager.PortalVisibleManage(anotherWorld,0f));
+        /*if (anotherWorld)//subに移動するとき
         {
             Debug.Log("change");
             StartCoroutine(portalManager.MainPortalManage(!anotherWorld,0));
@@ -51,7 +52,7 @@ public class GameMaster : SingletonMonoBehaviour<GameMaster> {
 
             StartCoroutine(portalManager.SubPortalManage(anotherWorld,0));
             StartCoroutine(portalManager.MainPortalManage(!anotherWorld,0f));
-        }
+        }*/
         //ChangeCamera(0.08f);
         subCamera.depth *= -1;
     }
