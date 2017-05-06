@@ -27,10 +27,10 @@ public class PortalManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        mainPortalCamera.GetMyPortalCamera().transform.localPosition = Vector3.zero;
+        mainPortalCamera.GetMyPortalCamera().transform.localPosition = mainCamera.transform.localPosition;
         mainPortalCamera.GetMyPortalCamera().transform.localRotation = mainCamera.transform.localRotation;
 
-        subPortalCamera.GetMyPortalCamera().transform.localPosition = Vector3.zero;
+        subPortalCamera.GetMyPortalCamera().transform.localPosition = mainCamera.transform.localPosition;
         subPortalCamera.GetMyPortalCamera().transform.localRotation = mainCamera.transform.localRotation;
     }
 
@@ -54,7 +54,6 @@ public class PortalManager : MonoBehaviour {
         position.y = 0;
 
         var parent =Instantiate(portalPref, position, Quaternion.identity).GetComponent<PortaParent>();
-        parent.transform.forward = forward;
 
         portalParents.Add(parent);
         parent.SetPortalCamera(mainPortalCamera,subPortalCamera);
@@ -63,6 +62,11 @@ public class PortalManager : MonoBehaviour {
         {
             parent.transform.forward = -forward;
             parent.SetPortalvisible(true);
+        }
+        else //mainにいる
+        {
+            parent.transform.forward = forward;
+            parent.SetPortalvisible(false);
         }
     }
 }

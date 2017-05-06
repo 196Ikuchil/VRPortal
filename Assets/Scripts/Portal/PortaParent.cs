@@ -15,8 +15,10 @@ public class PortaParent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        //浮遊感
+        //transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time, 01f), transform.position.z);
+    }
+
     public Portal GetMainPortal()
     {
         return mainPortal;
@@ -46,25 +48,27 @@ public class PortaParent : MonoBehaviour {
         if(anotherWorld) //subにいる
         {
             mainPortal.gameObject.SetActive(false);
-            mainPortal.transform.parent.gameObject.SetActive(false);
             mainPortal.StartAmin = false;
-            subPortal.gameObject.SetActive(true);
+            mainPortal.transform.parent.gameObject.SetActive(false);
             subPortal.transform.parent.gameObject.SetActive(true);
+            subPortal.gameObject.SetActive(true);
+            subPortal.StartAmin = true;
         }
         else
         {
-            mainPortal.gameObject.SetActive(true);
             mainPortal.transform.parent.gameObject.SetActive(true);
+            mainPortal.gameObject.SetActive(true);
+            mainPortal.StartAmin = true;
             subPortal.gameObject.SetActive(false);
-            subPortal.transform.parent.gameObject.SetActive(false);
             subPortal.StartAmin = false;
+            subPortal.transform.parent.gameObject.SetActive(false);
         }
 
     }
 
     public void SetPortalCamera(PortalCamera main,PortalCamera sub)
     {
-        SetMainPortalCamera(sub); //名前のつけ方
+        SetMainPortalCamera(sub); //名前のつけ方みすった
         SetSubPortalCamera(main);
     }
 }
