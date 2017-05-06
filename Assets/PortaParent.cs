@@ -47,6 +47,7 @@ public class PortaParent : MonoBehaviour {
         {
             mainPortal.gameObject.SetActive(false);
             mainPortal.transform.parent.gameObject.SetActive(false);
+            mainPortal.StartAmin = false;
             subPortal.gameObject.SetActive(true);
             subPortal.transform.parent.gameObject.SetActive(true);
         }
@@ -56,6 +57,7 @@ public class PortaParent : MonoBehaviour {
             mainPortal.transform.parent.gameObject.SetActive(true);
             subPortal.gameObject.SetActive(false);
             subPortal.transform.parent.gameObject.SetActive(false);
+            subPortal.StartAmin = false;
         }
 
     }

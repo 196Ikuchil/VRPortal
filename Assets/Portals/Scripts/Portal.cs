@@ -11,6 +11,10 @@ public class Portal : MonoBehaviour {
     private float cantChangeTimer = 0;
     bool isSub;
 
+    [SerializeField]
+    public bool StartAmin=true;
+    private Vector3 defaultSize;
+
 	void Awake () {
         _portalMaterial = GetComponent<MeshRenderer>().sharedMaterial;
         if(this.gameObject.layer == 8)
@@ -20,7 +24,34 @@ public class Portal : MonoBehaviour {
         {
             isSub = false;
         }
-	}
+        if (StartAmin)
+        {
+            defaultSize = this.transform.parent.transform.localScale;
+            this.transform.parent.transform.localScale = Vector3.zero;
+
+        }
+    }
+
+
+    void Start()
+    {
+        if(StartAmin)
+            StartCoroutine(Expand());
+    }
+
+    private IEnumerator Expand()
+    {
+        Vector3 adder = new Vector3(0.1f, 0.1f, 0.1f);
+        GameObject parent = this.transform.parent.gameObject;
+        while (true)
+        {
+            if (parent.transform.localScale.x > defaultSize.x) break;
+            parent.transform.localScale += adder;
+            yield return new WaitForEndOfFrame();
+
+        }
+    }
+
     void Update()
     {
         if (cantChange && cantChangeTimer>cantChangeTime)
